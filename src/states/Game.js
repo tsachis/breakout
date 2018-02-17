@@ -1,35 +1,59 @@
-/* globals __DEV__ */
 import Phaser from 'phaser'
-import Mushroom from '../sprites/Mushroom'
+import Brick from '../prefabs/Brick'
 
 export default class extends Phaser.State {
-  init() { }
-  preload() { }
+  init () { }
+  preload () { }
 
-  create() {
-    const bannerText = 'Phaser + ES6 + Webpack'
-    let banner = this.add.text(this.world.centerX, this.game.height - 80, bannerText, {
-      font: '40px Bangers',
-      fill: '#77BFA3',
-      smoothed: false
-    })
-
-    banner.padding.set(10, 16)
-    banner.anchor.setTo(0.5)
-
-    this.mushroom = new Mushroom({
-      game: this.game,
-      x: this.world.centerX,
-      y: this.world.centerY,
-      asset: 'mushroom'
-    })
-
-    this.game.add.existing(this.mushroom)
+  create () {
+    this.setupText();
+    this.setupBricks();
   }
 
-  render() {
-    if (__DEV__) {
-      this.game.debug.spriteInfo(this.mushroom, 32, 32)
+  setupBricks () {
+    this.bricksGroup = this.game.add.group();
+    this.generateBricks(this.bricksGroup);
+  }
+
+  generateBricks (bricksGroup) {
+    const rows = 5;
+    const columns = 15;
+    const xOffset = 50;
+    const yOffset = 45;
+
+    for (let y = 0; y < rows; y++) {
+      for (let x = 0; x < columns; x++) {
+        bricksGroup.add(new Brick(this.game, x * xOffset, y * yOffset));
+      }
     }
+
+    const brickGroupWidth = (columns * xOffset);
+
+    bricksGroup.position.setTo(
+      this.game.world.centerX - (brickGroupWidth / 2),
+      this.game.world.centerY - 250
+    );
+  }
+
+  setupText () {
+    this.createText(20, 20, 'left', `score: ${this.game.globals.score}`);
+    this.createText(0, 20, 'center', `lives: ${this.game.globals.lives}`);
+    this.createText(-20, 20, 'right', `level: ${this.game.globals.level}`);
+  }
+
+  createText (xOffset, yOffset, align, text) {
+    return this.add.text(
+      xOffset,
+      yOffset,
+      text,
+      {
+        font: 'Ariel 18px',
+        fill: '#333',
+        boundsAlignH: align
+      }
+    ).setTextBounds(0, 0, this.game.world.width, 0);
+  }
+
+  render () {
   }
 }

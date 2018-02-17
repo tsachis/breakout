@@ -1,18 +1,18 @@
-var path = require('path')
-var webpack = require('webpack')
-var CleanWebpackPlugin = require('clean-webpack-plugin')
-var HtmlWebpackPlugin = require('html-webpack-plugin')
-var CopyWebpackPlugin = require('copy-webpack-plugin')
+const path = require('path');
+const webpack = require('webpack');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 // Phaser webpack config
-var phaserModule = path.join(__dirname, '/node_modules/phaser-ce/')
-var phaser = path.join(phaserModule, 'build/custom/phaser-split.js')
-var pixi = path.join(phaserModule, 'build/custom/pixi.js')
-var p2 = path.join(phaserModule, 'build/custom/p2.js')
+const phaserModule = path.join(__dirname, '/node_modules/phaser-ce/');
+const phaser = path.join(phaserModule, 'build/custom/phaser-split.js');
+const pixi = path.join(phaserModule, 'build/custom/pixi.js');
+const p2 = path.join(phaserModule, 'build/custom/p2.js');
 
-var definePlugin = new webpack.DefinePlugin({
+const definePlugin = new webpack.DefinePlugin({
   __DEV__: JSON.stringify(JSON.parse(process.env.BUILD_DEV || 'false'))
-})
+});
 
 module.exports = {
   entry: {
@@ -86,4 +86,4 @@ module.exports = {
       'p2': p2
     }
   }
-}
+};
