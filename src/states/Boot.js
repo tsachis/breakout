@@ -13,6 +13,7 @@ export default class extends Phaser.State {
 
   create () {
     this.game.globals = _.clone(globals);
+    this.stage.setBackgroundColor('#eee');
   }
 
   preload () {
@@ -31,7 +32,11 @@ export default class extends Phaser.State {
     this.load.image('loaderBg', './assets/images/loader-bg.png');
     this.load.image('loaderBar', './assets/images/loader-bar.png');
     this.load.image('brick', './assets/images/brick.png');
-    this.load.image('pad', './assets/images/pad.png');
+    this.load.image('paddle', './assets/images/paddle.png');
+    this.load.image('ball', './assets/images/ball.png');
+    this.load.audio('ping', 'assets/audio/ping.ogg');
+    this.load.audio('lost-ball', 'assets/audio/lost-ball.ogg');
+    this.load.audio('game-over', 'assets/audio/game-over.ogg');
   }
 
   render () {

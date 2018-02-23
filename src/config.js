@@ -1,4 +1,6 @@
 export default {
   localStorageName: 'phaseres6webpack',
-  webfonts: ['Bangers']
+  webfonts: ['Bangers', 'Bungee Shade'],
+  gameWidth: 800,
+  gameHeight: 800
 }
