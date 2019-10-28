@@ -151,7 +151,9 @@ export default class extends Phaser.State {
   }
 
   ballHitPaddle (ball, paddle) {
-    this.pingSound.play();
+    if (!this.ballOnPaddle) {
+      this.pingSound.play();
+    }
     ball.body.velocity.x = 10 * (ball.x - paddle.x);
   }
 
